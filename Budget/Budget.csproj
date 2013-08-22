@@ -195,6 +195,8 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\BudgetItemModel.cs" />
+    <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\ItemTypeList.cs" />
     <Compile Include="Models\StandardItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
