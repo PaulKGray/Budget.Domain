@@ -20,6 +20,8 @@ namespace Budget.Models
         [DisplayName("Item Type")]
         public Budget.Domain.ItemType Type { get; set; }
 
+        [DisplayName("Item Description")]
+        [StringLength(1000)]
         public string Description { get; set; }
 
         public StandardItem()
