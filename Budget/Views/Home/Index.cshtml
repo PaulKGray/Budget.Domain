@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<h1>The App</h1>
+
+<p>Its time to get you started and create your budget</p>
+
+
+<form action="/CreateNew" method="Post">
+
+    <h2>Personal Details</h2>
+
+    @Html.ValidationSummary(true)
+    
+   
+    <fieldset>
+        <legend>Create New</legend>
+        
+        <label for="username">Enter the date you want to start </label>
+        <input id="usersname" type="text"  />
+
+        <label for="DateStart">Enter the date you want to start </label>
+        <input id="DateStart" type="date" min="@DateTime.Now" max="@DateTime.Now.AddMonths(1)" />
+
+        <input type="submit" />
+
+    </fieldset>
+
+</form>
+
