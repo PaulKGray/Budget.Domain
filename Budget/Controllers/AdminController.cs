@@ -53,7 +53,7 @@ namespace Budget.Controllers
             if (ModelState.IsValid) {
 
             // needs to assign correct enum for expense type.
-            var theNewStandardItem = new Budget.Domain.BudgetStandardItem(item.Name, Budget.Domain.ItemType.Expense, item.Description);
+            var theNewStandardItem = new Budget.Domain.BudgetStandardItem(item.Name, item.Type, item.Description);
             _StandardItemService.AddNewStandardItem(theNewStandardItem);
 
             return RedirectToAction("Index");
