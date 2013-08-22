@@ -53,7 +53,7 @@ namespace Budget.Controllers
             if (ModelState.IsValid) {
 
             // needs to assign correct enum for expense type.
-            var theNewStandardItem = new Budget.Domain.BudgetStandardItem(item.Name, Budget.Domain.ItemType.Expense);
+            var theNewStandardItem = new Budget.Domain.BudgetStandardItem(item.Name, Budget.Domain.ItemType.Expense, item.Description);
             _StandardItemService.AddNewStandardItem(theNewStandardItem);
 
             return RedirectToAction("Index");
@@ -68,10 +68,11 @@ namespace Budget.Controllers
         {
             var theStandardItem = _StandardItemService.GetStandardItem(id);
             var theModelStandardItem = new StandardItem();
+           
             theModelStandardItem.Name = theStandardItem.Name;
             theModelStandardItem.id = theStandardItem.StandardItemId;
+            theModelStandardItem.Description = theStandardItem.Description;
             // to deal with
-            theModelStandardItem.selectedType = 1;
             theModelStandardItem.Type = Domain.ItemType.Expense;
             return View(theModelStandardItem);
         }
@@ -83,8 +84,7 @@ namespace Budget.Controllers
             if (ModelState.IsValid)
             {
 
-                var Type = Domain.ItemType.Expense;
-                var DomStandardItem = new Budget.Domain.BudgetStandardItem(item.Name, Type);
+                var DomStandardItem = new Budget.Domain.BudgetStandardItem(item.Name, item.Type, item.Description);
                 DomStandardItem.StandardItemId = item.id;
 
                 _StandardItemService.EditStandardItem(DomStandardItem);

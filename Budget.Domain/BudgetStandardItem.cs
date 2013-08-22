@@ -11,16 +11,18 @@ namespace Budget.Domain
         public virtual  int StandardItemId { get; set; }
         public virtual string Name { get; set; }
         public virtual ItemType Type { get; set; }
+        public virtual string Description { get; set; }
 
         protected BudgetStandardItem()
         {
 
         }
 
-        public BudgetStandardItem(string name, ItemType type)
+        public BudgetStandardItem(string name, ItemType type, string description)
         {
             this.Name = name;
             this.Type = type;
+            this.Description = description;
         }
 
         // May need to add list of affected items.

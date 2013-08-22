@@ -16,6 +16,7 @@ namespace Budget.Repository.Mappings
             Id(x => x.StandardItemId);
             Map(x => x.Name);
             Map(x=> x.Type);
+            Map(x => x.Description);
 
 
 
