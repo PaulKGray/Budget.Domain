@@ -18,7 +18,7 @@ namespace Budget.Controllers
             _StandardItemService = standardItemService;
         }
             
-
+        [HttpGet]
         public ActionResult Index()
         {
 
@@ -50,6 +50,31 @@ namespace Budget.Controllers
 
 
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Index(HomeModel model) {
+
+            if (ModelState.IsValid)
+            {
+
+                foreach (var item in model.ExpenseItems)
+                {
+                    var thename = item.Name;
+                }
+
+                return RedirectToAction("NextSteps");
+
+            }
+ 
+            return View(model);
+        }
+
+        public ActionResult NextSteps() {
+
+
+            return View();
+            
         }
 
 

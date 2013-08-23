@@ -8,6 +8,7 @@ namespace Budget.Models
     public class HomeModel
     {
 
+        public string Notes { get; set; }
 
         public IList<BudgetItemModel> IncomeItems { get; set; }
         public IList<BudgetItemModel> ExpenseItems { get; set; }

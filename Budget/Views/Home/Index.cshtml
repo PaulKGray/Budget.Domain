@@ -5,33 +5,46 @@
 <p>Its time to get you started and create your budget</p>
 
 
-<form action="/CreateNew" method="Post">
-
     <h2>Personal Details</h2>
 
    
-@using (Html.BeginForm("EditStandardItem", "Admin", FormMethod.Post))
+@using (Html.BeginForm("Index","Home", FormMethod.Post))
 {
 
     @Html.ValidationSummary(true)
     
-
+    
     <h2>Income</h2>
-    
-    foreach (var item in Model.IncomeItems)
+     
+    for (var i = 0; i < Model.IncomeItems.Count();i++ )
     {
-         @item.Name;
-        <br />
-    }
-    
+
+       <div>    
+       @Html.TextBoxFor(x => x.IncomeItems[i].Name, new { @readonly = true })
+        £
+       @Html.TextBoxFor(x => x.IncomeItems[i].DefaultValue)
+       </div> 
+       
+    };
+ 
     <h2>Expenditure</h2>
     
-    foreach (var item in Model.ExpenseItems)
+     
+    for (var i = 0; i < Model.ExpenseItems.Count();i++ )
     {
-        @item.Name;
-        <br />
-    }
+        
+       <div>    
+       @Html.TextBoxFor(x => x.ExpenseItems[i].Name, new { @readonly = true })
+        £
+       @Html.TextBoxFor(x => x.ExpenseItems[i].DefaultValue)
+       </div> 
+       
+    };
+        
+   <input type="submit" value="Proceed" />
+    
+    
     
 }
-</form>
+
 
