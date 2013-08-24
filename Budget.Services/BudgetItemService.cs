@@ -13,7 +13,11 @@ namespace Budget.Services
     
     {
         private IRepository<BudgetItem> _BudgetItemRepository;
-        private IBudgetService _BudgetService;
+
+        public BudgetItemService(IRepository<BudgetItem> repository)
+        {
+            _BudgetItemRepository = repository;
+        }
 
 
         public BudgetItem  GetBudgetItem(int budgetItemId)
@@ -29,6 +33,27 @@ namespace Budget.Services
                 _BudgetItemRepository.Update(budgetItem);
             }
 
+        }
+
+        public void SaveBudgetItems(IList<BudgetItem> budgetItems) {
+
+            IList<BudgetItem> itemsToAdd = new List<BudgetItem>();
+
+            foreach (var item in budgetItems)
+            {
+                if (item.BudgetItemid == 0)
+                {
+                    itemsToAdd.Add(item);
+                }
+                else {
+                    _BudgetItemRepository.Update(item);
+                }
+
+            }
+
+            if (itemsToAdd.Count > 0) {
+                _BudgetItemRepository.Add(itemsToAdd);
+            }
         }
     }
 }

@@ -21,6 +21,12 @@ namespace Budget.Domain
 
         }
 
+
+        /// <summary>
+        /// Constructor for items creates the basic info off the back of items
+        /// </summary>
+        /// <param name="budgetPeriod"></param>
+        /// <param name="item"></param>
         public BudgetPeriodItem(BudgetPeriod budgetPeriod, BudgetItem item)
         {
             this.BudgetPeriod = budgetPeriod;

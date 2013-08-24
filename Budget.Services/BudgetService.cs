@@ -13,14 +13,11 @@ namespace Budget.Services
     {
         
         private IRepository<ClientBudget> _ClientBudgetRepository;
-        private IBudgetPeriodService _BudgetPeriodService;
 
 
-        public BudgetService(IRepository<ClientBudget> repository, 
-            IBudgetPeriodService budgetPeriodService)
+        public BudgetService(IRepository<ClientBudget> repository)
         {
             _ClientBudgetRepository = repository;
-            _BudgetPeriodService = budgetPeriodService;
         }
 
         /// <summary>
@@ -30,6 +27,9 @@ namespace Budget.Services
         public ClientBudget CreateBudget(string username)
         {
             var budget = new ClientBudget(username);
+            budget.Username = username;
+            budget.Created = DateTime.Now;
+           
 
             _ClientBudgetRepository.Add(budget);
 
@@ -43,7 +43,7 @@ namespace Budget.Services
         /// </summary>
         /// <param name="budget">the budget being used</param>
         /// <returns>a budget with periods</returns>
-        public ClientBudget SetUpInitialClientBudget(ClientBudget budget) {
+        public ClientBudget SetUpInitialClientBudget(ClientBudget budget, BudgetPeriodService _BudgetPeriodService) {
 
             if (budget.Items.Count > 1)
             {

@@ -25,6 +25,15 @@ namespace Budget.Domain
             this.Description = description;
         }
 
+
+        public BudgetStandardItem(int id, string name, ItemType type, string description)
+        {
+            this.StandardItemId = id;
+            this.Name = name;
+            this.Type = type;
+            this.Description = description;
+        }
+
         // May need to add list of affected items.
     }
 }

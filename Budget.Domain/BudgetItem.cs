@@ -26,11 +26,20 @@ namespace Budget.Domain
             this.Type = type;
             DefaultValue = 0;
         }
-        
-        public virtual void AddStandardType(BudgetStandardItem standardItem) {
-             this.StandardItem = standardItem;
+        /// <summary>
+        /// Constuctor for budget items off standard item types.
+        /// adds the name and type off the standard item all
+        /// we need to worry about is the value
+        /// </summary>
+        /// <param name="standardItem"></param>
+        public BudgetItem(ClientBudget budget, BudgetStandardItem standardItem, decimal defaultvalue)
+        {
+            this.Budget = budget;
+            this.StandardItem = standardItem;
             this.Type = standardItem.Type;
             this.Name = standardItem.Name;
+            this.DefaultValue = defaultvalue;
+            this.Active = true;
         }
 
       

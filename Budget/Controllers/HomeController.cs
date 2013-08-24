@@ -1,4 +1,5 @@
-﻿using Budget.Models;
+﻿using Budget.Domain;
+using Budget.Models;
 using Budget.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,14 @@ namespace Budget.Controllers
     {
 
         private IStandardItemService _StandardItemService;
+        private IBudgetService _BudgetService;
+        private IBudgetItemService _BudgetItemService;
 
-        public HomeController(IStandardItemService standardItemService)
+        public HomeController(IStandardItemService standardItemService, IBudgetService budgetService, IBudgetItemService budgetItemService)
         {
             _StandardItemService = standardItemService;
+            _BudgetService = budgetService;
+            _BudgetItemService = budgetItemService;
         }
             
         [HttpGet]
@@ -58,10 +63,25 @@ namespace Budget.Controllers
             if (ModelState.IsValid)
             {
 
+                var budget=_BudgetService.CreateBudget("Temp");
+
+                IList<BudgetItem> itemsToAdd = new List<BudgetItem>();
+
                 foreach (var item in model.ExpenseItems)
                 {
-                    var thename = item.Name;
+                    var theStandardItem = new BudgetStandardItem(item.standardItem.id ,item.standardItem .Name , item.standardItem.Type, item.standardItem.Description);
+                    var newItem = new BudgetItem(budget, theStandardItem, item.DefaultValue);
+                    itemsToAdd.Add(newItem);
                 }
+
+                foreach (var incomeItems in model.IncomeItems) 
+                {
+                    var theIncomeItems = new BudgetStandardItem(incomeItems.standardItem.id, incomeItems.standardItem.Name, incomeItems.standardItem.Type, incomeItems.standardItem.Description);
+                    var newIncomeItem = new BudgetItem(budget, theIncomeItems, incomeItems.DefaultValue);
+                    itemsToAdd.Add(newIncomeItem);
+                }
+
+              
 
                 return RedirectToAction("NextSteps");
 

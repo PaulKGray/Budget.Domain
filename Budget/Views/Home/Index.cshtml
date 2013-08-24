@@ -25,6 +25,7 @@
        @Html.TextBoxFor(x => x.IncomeItems[i].Name, new { @readonly = true })
         £
        @Html.TextBoxFor(x => x.IncomeItems[i].DefaultValue)
+       @Html.HiddenFor(x => x.IncomeItems[i].standardItem.id)
        </div> 
        
     };
@@ -39,6 +40,7 @@
        @Html.TextBoxFor(x => x.ExpenseItems[i].Name, new { @readonly = true })
         £
        @Html.TextBoxFor(x => x.ExpenseItems[i].DefaultValue)
+       @Html.HiddenFor(x => x.ExpenseItems[i].standardItem.id)
        </div> 
        
     };
