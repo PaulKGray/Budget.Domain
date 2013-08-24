@@ -11,7 +11,7 @@ namespace Budget.Controllers
         //
         // GET: /Budget/
 
-        public ActionResult Index()
+        public ActionResult BudgetSummary()
         {
 
 
