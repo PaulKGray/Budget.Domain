@@ -12,6 +12,6 @@ namespace Budget.Services.Interfaces
         ClientBudget CreateBudget(string username);
         ClientBudget GetBudget(int budgetId, string username);
         ClientBudget RecalculatedBudget(ClientBudget budget);
-
+        ClientBudget SaveBudget(ClientBudget budget);
     }
 }

@@ -73,20 +73,22 @@ namespace Budget.Controllers
 
                 foreach (var item in model.ExpenseItems)
                 {
-                    var theStandardItem = new BudgetStandardItem(item.StandardItemId);
-                    var newItem = new BudgetItem(budget, theStandardItem, item.DefaultValue);
-                    itemsToAdd.Add(newItem);
+                    var theStandardItem = _StandardItemService.GetStandardItem(item.StandardItemId);
+                    var newItem = new BudgetItem(budget, theStandardItem, item.DefaultValue, item.Name, ItemType.Expense);
+                    budget.AddItem(newItem);
                 }
 
                 foreach (var incomeItems in model.IncomeItems) 
                 {
-                    var theIncomeItems = new BudgetStandardItem(incomeItems.StandardItemId);
-                    var newIncomeItem = new BudgetItem(budget, theIncomeItems, incomeItems.DefaultValue);
-                    itemsToAdd.Add(newIncomeItem);
+                    var theIncomeStandardItem = _StandardItemService.GetStandardItem(incomeItems.StandardItemId);
+                    var newIncomeItem = new BudgetItem(budget, theIncomeStandardItem, incomeItems.DefaultValue, incomeItems.Name, ItemType.Income);
+                    budget.AddItem(newIncomeItem);
                 }
 
 
-                itemsToAdd =  _BudgetItemService.SaveBudgetItems(itemsToAdd);
+                _BudgetService.SaveBudget(budget);
+
+                //Look at passing the budget tp the next view via temp data
 
                 return RedirectToAction("NextSteps");
 

@@ -17,8 +17,8 @@ namespace Budget.Repository.Mappings
             Map(x => x.DefaultValue);
             Map(x => x.Name);
             Map(x => x.Type);
-            HasOne(x => x.StandardItem);
-            HasOne(x => x.Budget);
+            HasOne(x => x.StandardItem).Constrained();
+            HasOne(x => x.Budget).Cascade.None();
         }
     }
 }

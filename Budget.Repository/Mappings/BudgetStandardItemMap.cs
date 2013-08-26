@@ -17,6 +17,7 @@ namespace Budget.Repository.Mappings
             Map(x => x.Name);
             Map(x=> x.Type);
             Map(x => x.Description);
+            HasMany(x => x.BudgetItems);
 
 
 

@@ -32,12 +32,12 @@ namespace Budget.Domain
         /// we need to worry about is the value
         /// </summary>
         /// <param name="standardItem"></param>
-        public BudgetItem(ClientBudget budget, BudgetStandardItem standardItem, decimal defaultvalue)
+        public BudgetItem(ClientBudget budget, BudgetStandardItem standardItem, decimal defaultvalue, string name, ItemType type)
         {
             this.Budget = budget;
             this.StandardItem = standardItem;
-            this.Type = standardItem.Type;
-            this.Name = standardItem.Name;
+            this.Type = type;
+            this.Name = name;
             this.DefaultValue = defaultvalue;
             this.Active = true;
         }

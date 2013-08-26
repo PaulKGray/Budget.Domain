@@ -89,5 +89,13 @@ namespace Budget.Services
 
             return budget;
         }
+
+        public ClientBudget SaveBudget(ClientBudget budget) {
+
+            _ClientBudgetRepository.Update(budget);
+
+            return budget;
+            
+        }
     }
 }

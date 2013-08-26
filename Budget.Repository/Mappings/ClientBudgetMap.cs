@@ -15,7 +15,7 @@ namespace Budget.Repository.Mappings
             Table("ClientBudget");
             Id(x => x.BudgetId);
             Map(x => x.Created);
-            HasMany(x => x.Items);
+            HasMany(x => x.Items).Cascade.All();
             HasMany(x => x.Periods);
         }
    
