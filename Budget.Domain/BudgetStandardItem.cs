@@ -18,6 +18,11 @@ namespace Budget.Domain
 
         }
 
+        public BudgetStandardItem(int id)
+        {
+            this.StandardItemId = id;
+        }
+
         public BudgetStandardItem(string name, ItemType type, string description)
         {
             this.Name = name;

@@ -34,10 +34,10 @@ namespace Budget.Services
             }
 
         }
-
-        public void SaveBudgetItems(IList<BudgetItem> budgetItems) {
+        public IList<BudgetItem> SaveBudgetItems(IList<BudgetItem> budgetItems){
 
             IList<BudgetItem> itemsToAdd = new List<BudgetItem>();
+            IList<BudgetItem> itemsAdded = new List<BudgetItem>();
 
             foreach (var item in budgetItems)
             {
@@ -47,13 +47,24 @@ namespace Budget.Services
                 }
                 else {
                     _BudgetItemRepository.Update(item);
+                    itemsAdded.Add(item);
                 }
 
             }
 
             if (itemsToAdd.Count > 0) {
-                _BudgetItemRepository.Add(itemsToAdd);
+
+                foreach (var item in itemsToAdd)
+                {  
+                    itemsAdded.Add(_BudgetItemRepository.Add(item));
+                }
+                
             }
+
+            return itemsToAdd;
         }
+
+
+       
     }
 }

@@ -11,7 +11,7 @@ namespace Budget.Services.Interfaces
     {
         BudgetItem GetBudgetItem(int budgetItemId);
         void SaveBudgetItem(BudgetItem budgetItem);
-        void SaveBudgetItems(IList<BudgetItem> budgetItems);
+        IList<BudgetItem> SaveBudgetItems(IList<BudgetItem> budgetItems);
 
     }
 }

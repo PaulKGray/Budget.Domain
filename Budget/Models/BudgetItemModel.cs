@@ -11,6 +11,8 @@ namespace Budget.Models
     {
         public StandardItem standardItem;
 
+        public int StandardItemId { get; set; }
+
         [DisplayName("Item")]
         public string Name { get; set; }
 

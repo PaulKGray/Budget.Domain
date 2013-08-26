@@ -1,4 +1,5 @@
-﻿using Budget.Domain;
+﻿using Budget.Controllers.Actionfilters;
+using Budget.Domain;
 using Budget.Models;
 using Budget.Services.Interfaces;
 using System;
@@ -39,9 +40,11 @@ namespace Budget.Controllers
                 modelitem.Description = item.Description;
                 modelitem.id = item.StandardItemId;
 
+
                 var budgetItemModel = new BudgetItemModel(modelitem);
 
                 budgetItemModel.Name = item.Name;
+                budgetItemModel.StandardItemId = item.StandardItemId;
 
                 if (item.Type == Domain.ItemType.Expense)
                 {
@@ -58,6 +61,7 @@ namespace Budget.Controllers
         }
 
         [HttpPost]
+        [Transaction]
         public ActionResult Index(HomeModel model) {
 
             if (ModelState.IsValid)
@@ -69,19 +73,20 @@ namespace Budget.Controllers
 
                 foreach (var item in model.ExpenseItems)
                 {
-                    var theStandardItem = new BudgetStandardItem(item.standardItem.id ,item.standardItem .Name , item.standardItem.Type, item.standardItem.Description);
+                    var theStandardItem = new BudgetStandardItem(item.StandardItemId);
                     var newItem = new BudgetItem(budget, theStandardItem, item.DefaultValue);
                     itemsToAdd.Add(newItem);
                 }
 
                 foreach (var incomeItems in model.IncomeItems) 
                 {
-                    var theIncomeItems = new BudgetStandardItem(incomeItems.standardItem.id, incomeItems.standardItem.Name, incomeItems.standardItem.Type, incomeItems.standardItem.Description);
+                    var theIncomeItems = new BudgetStandardItem(incomeItems.StandardItemId);
                     var newIncomeItem = new BudgetItem(budget, theIncomeItems, incomeItems.DefaultValue);
                     itemsToAdd.Add(newIncomeItem);
                 }
 
-              
+
+                itemsToAdd =  _BudgetItemService.SaveBudgetItems(itemsToAdd);
 
                 return RedirectToAction("NextSteps");
 
